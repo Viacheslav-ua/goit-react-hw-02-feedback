@@ -8,8 +8,8 @@ interface StateType {
   good: number;
   neutral: number;
   bad: number;
-  statisticsShow: boolean;
 }
+
 interface PropsType {
   initialGood: number;
   initialNeutral: number;
@@ -27,7 +27,6 @@ class App extends React.Component<PropsType> {
     good: this.props.initialGood,
     neutral: this.props.initialNeutral,
     bad: this.props.initialBad,
-    statisticsShow: false,
   };
 
   onLeaveFeedback = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -48,7 +47,6 @@ class App extends React.Component<PropsType> {
         });
         break;
     }
-    this.setState({ statisticsShow: true });
   };
 
   countTotalFeedback = () => {
@@ -68,7 +66,7 @@ class App extends React.Component<PropsType> {
     return (
       <Section title="Please leave feedback">
         <FeedbackOptions onLeaveFeedback={this.onLeaveFeedback} />
-        {this.state.statisticsShow ? (
+        {this.state.good || this.state.neutral || this.state.bad ? (
           <Statistics
             good={this.state.good}
             neutral={this.state.neutral}
