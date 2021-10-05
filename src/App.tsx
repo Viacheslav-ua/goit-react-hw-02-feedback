@@ -3,7 +3,6 @@ import Section from "./components/Section/Section";
 import Statistics from "./components/Section/Statistics/Statistics";
 import FeedbackOptions from "./components/Section/FeedbackOptions/FeedbackOptions";
 import Notification from "./components/Section/Notification/Notification";
-import "./App.css";
 
 interface StateType {
   good: number;

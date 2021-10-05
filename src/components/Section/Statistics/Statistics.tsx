@@ -1,4 +1,5 @@
 import React from "react";
+import S from "./Statistics.module.css";
 
 interface PropsType {
   good: number;
@@ -15,14 +16,16 @@ const Statistics: React.FC<PropsType> = ({
   positivePercentage,
 }) => {
   return (
-    <div>
-      <h2 className="title">Statistics</h2>
-      <span className="value">Good: {good}</span>
-      <span className="value">Neutral: {neutral}</span>
-      <span className="value">Bad: {bad}</span>
-      <span className="value">Total: {total}</span>
-      <span className="value">Positive feedback: {positivePercentage}</span>
-    </div>
+    <>
+      <h2 className={S.title}>Statistics</h2>
+      <div className={S.statistics}>
+        <span className={S.value}>Good: {good}</span>
+        <span className={S.value}>Neutral: {neutral}</span>
+        <span className={S.value}>Bad: {bad}</span>
+        <span className={S.value}>Total: {total}</span>
+        <span className={S.value}>Positive feedback: {positivePercentage}</span>
+      </div>
+    </>
   );
 };
 
