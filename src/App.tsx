@@ -1,13 +1,15 @@
 import React from "react";
-import "./App.css";
 import Section from "./components/Section/Section";
 import Statistics from "./components/Section/Statistics/Statistics";
 import FeedbackOptions from "./components/Section/FeedbackOptions/FeedbackOptions";
+import Notification from "./components/Section/Notification/Notification";
+import "./App.css";
 
 interface StateType {
   good: number;
   neutral: number;
   bad: number;
+  statisticsShow: boolean;
 }
 interface PropsType {
   initialGood: number;
@@ -26,6 +28,7 @@ class App extends React.Component<PropsType> {
     good: this.props.initialGood,
     neutral: this.props.initialNeutral,
     bad: this.props.initialBad,
+    statisticsShow: false,
   };
 
   onLeaveFeedback = (e: React.MouseEvent<HTMLButtonElement>) => {
@@ -46,6 +49,7 @@ class App extends React.Component<PropsType> {
         });
         break;
     }
+    this.setState({ statisticsShow: true });
   };
 
   countTotalFeedback = () => {
@@ -65,13 +69,17 @@ class App extends React.Component<PropsType> {
     return (
       <Section title="Please leave feedback">
         <FeedbackOptions onLeaveFeedback={this.onLeaveFeedback} />
-        <Statistics
-          good={this.state.good}
-          neutral={this.state.neutral}
-          bad={this.state.bad}
-          total={this.countTotalFeedback()}
-          positivePercentage={this.countPositiveFeedbackPercentage()}
-        />
+        {this.state.statisticsShow ? (
+          <Statistics
+            good={this.state.good}
+            neutral={this.state.neutral}
+            bad={this.state.bad}
+            total={this.countTotalFeedback()}
+            positivePercentage={this.countPositiveFeedbackPercentage()}
+          />
+        ) : (
+          <Notification message="No feedback given" />
+        )}
       </Section>
     );
   }
